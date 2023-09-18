@@ -1,0 +1,29 @@
+.categories-flex{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.cat-text{
+    width: 70%;
+}
+
+.items-flex{
+    margin: auto;
+    width: 81%;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+
+    // img{
+    //     width: 286px;
+    //     height: 286px;
+    //     object-fit: contain;
+    // }
+}
