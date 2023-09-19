@@ -4,11 +4,12 @@ Authors: Sham Al-Jalam
 
 A Web application will power an online storefront that will allow our users to browse our product offerings by category, place items in their shopping cart, and check-out when they are ready to make their purchase
 
+
 ## URLs
 
-* deployed application : [https://tangerine-nougat-187c24.netlify.app/](https://tangerine-nougat-187c24.netlify.app/)
+* deployed application : [https://idyllic-marzipan-c82c0e.netlify.app/](https://idyllic-marzipan-c82c0e.netlify.app/)
 
-*  pull request: [https://github.com/ShamAhmad2022/todo-app/pull/5](https://github.com/ShamAhmad2022/todo-app/pull/5)
+*  pull request: [https://github.com/ShamAhmad2022/storefront/pull/2](https://github.com/ShamAhmad2022/storefront/pull/2)
 
 ### Running the app:
 * npm start
@@ -18,3 +19,6 @@ A Web application will power an online storefront that will allow our users to b
 
 ### UML
 ![WML](./src/images/storefront.png)
+=======
+
+

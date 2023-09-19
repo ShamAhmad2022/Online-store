@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavBAr() {
   return (
     <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
       <div className="container-fluid">
-        <a className="navbar-brand">Storefront</a>
-        <a className="navbar-brand">Cart(0)</a>
+        <Link className="navbar-brand" href="#">Storefront</Link>
+        <Link className="navbar-brand" href="#">Cart(0)</Link>
       </div>
     </nav>
   );
