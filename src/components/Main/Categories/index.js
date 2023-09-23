@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import './Categories.scss';
+import { actionTypes } from '../../../store/reducers/actionTypes';
 
-function Categories() {
+function Categories({categories, dispatch, setActiveCategory}) {
+
+  const allcategories = [...new Set(categories)];
+
+  const changeActiveCategory = (item)=>{
+    // dispatch({type: actionTypes.SET_ACTIVECATEGORY, payload: item});
+    setActiveCategory(item);
+  }
+
   return (
-    <div>
-        <p>Electronics | Clothes | cars</p>
+    <div className='categories-container'>
+        {allcategories.map(item => <button onClick={() => changeActiveCategory(item)}>{item}</button>)}
     </div>
   )
 }

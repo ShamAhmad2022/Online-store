@@ -21,9 +21,9 @@
     flex-wrap: wrap;
     align-items: center;
 
-    // img{
-    //     width: 286px;
-    //     height: 286px;
-    //     object-fit: contain;
-    // }
+    img{
+        width: 100%;
+        height: 310px;
+        object-fit: cover;
+    }
 }

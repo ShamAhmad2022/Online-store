@@ -1,0 +1,12 @@
+.categories-container{
+    button{
+        color: rgb(9, 65, 185);
+        background-color: transparent;
+        border: none;
+
+        &:not(:last-child){
+            padding: 0 10px;
+            border-right: 2px solid rgb(9, 65, 185);
+        }
+    }
+}
