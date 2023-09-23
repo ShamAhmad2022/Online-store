@@ -3,7 +3,7 @@ import './Footer.scss';
 
 function Footer() {
   return (
-    <div class="p-3 bg-secondary text-white centerise">2022 @sham</div>
+    <div className="p-3 bg-secondary text-white centerise">2022 @sham</div>
   )
 }
 
