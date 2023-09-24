@@ -3,14 +3,15 @@ import Products from './Products'
 import Categories from './Categories'
 import './Main.scss';
 import axios from 'axios';
-import { initialState, reducer, setProducts, setCategory, setActiveCategory } from '../../store/reducers/reducer';
+import { initialState, reducer } from '../../store/reducers/reducer';
+import { setProducts, setCategory, setActiveCategory, addToCart } from '../../store/reducers/actions';
 import { actionTypes } from '../../store/reducers/actionTypes';
 import { connect } from 'react-redux';
 
 function Main(props) {
 
-  // const [state, dispatch] = useReducer(reducer, initialState);
-  // console.log(props,'---------------------------------------');
+  // const [state, dispatch] = useReducer(reducer, initialState)       ;
+  console.log(props,'---------------------------------------');
 
   useEffect(() => {
     // the old API: https://fakestoreapi.com/products/
@@ -39,9 +40,12 @@ function Main(props) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  reducer1 : state.reducer
-})
+const mapStateToProps = (state) => {
+  return {
+    reducer1 : state.reducer
+  };
+}
+
 
 const mapDispatchToProps = {
   setProducts,

@@ -4,7 +4,8 @@ import { actionTypes } from "./actionTypes";
 export const initialState = {
     products: [],
     category: [],
-    activeCategory : ''
+    activeCategory : '',
+    cart: []
 }
 
 //then the reducers
@@ -24,19 +25,15 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state, activeCategory: payload
             }
+        case actionTypes.ADD_TO_CART :
+            return {
+                ...state, cart: [...state.cart, payload]
+            }
+        case actionTypes.DELETE_FROM_CART :
+            return {
+                ...state, cart: state.cart.filter(item => item.id!==payload)
+            }
     
         default: return state;
     }
-}
-
-export const setProducts = (products) => {
-    return { type: actionTypes.SET_PRODUCTS, payload: products }
-}
-
-export const setCategory = (categories) => {
-    return { type: actionTypes.SET_CATEGORY, payload: categories } 
-}
-
-export const setActiveCategory = (category) => {
-    return { type: actionTypes.SET_ACTIVECATEGORY, payload: category }
 }
