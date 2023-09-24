@@ -1,0 +1,19 @@
+.cart-flex{
+    display: flex;
+    justify-content:space-between;
+}
+
+.cart-item{
+    background-color: rgb(238, 238, 238);
+    padding: 20px;
+    margin: 10px;
+}
+
+.delete-icon:hover{
+    cursor: pointer;
+    filter: brightness(4);
+}
+
+.line{
+    margin: 50px;
+}
