@@ -19,3 +19,7 @@ export const addToCart = (item) => {
 export const deleteFromCart = (id) => {
     return { type: actionTypes.DELETE_FROM_CART, payload: id }
 }
+
+export const toggleIsClicked = (id) => {
+    return { type: actionTypes.TOGGLE_IS_CLICKED, payload:id }
+}

@@ -1,14 +1,18 @@
 import React from 'react';
 import './Categories.scss';
-import { actionTypes } from '../../../store/reducers/actionTypes';
+import { setActiveCategory } from '../../../store/reducers/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Categories({categories, dispatch, setActiveCategory}) {
+function Categories() {
 
-  const allcategories = [...new Set(categories)];
+  const state = useSelector(state => state.reducer);
+  const dispatch = useDispatch();
+
+  const allcategories = [...new Set(state.category)];
 
   const changeActiveCategory = (item)=>{
     // dispatch({type: actionTypes.SET_ACTIVECATEGORY, payload: item});
-    setActiveCategory(item);
+    dispatch(setActiveCategory(item));
   }
 
   return (

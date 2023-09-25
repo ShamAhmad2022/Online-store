@@ -1,4 +1,4 @@
-# Lab 37
+# Lab 38
 
 ## Application State with Redux
 
@@ -22,5 +22,5 @@ A Web application will power an online storefront that will allow our users to b
 
 ### UML
 
-![WML](./src/images/storefront(2).png)
+![WML](./src/images/storefront(3).png)
 =======

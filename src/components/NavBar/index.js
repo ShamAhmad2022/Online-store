@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   Drawer,
@@ -21,10 +21,27 @@ import { DeleteIcon } from '@chakra-ui/icons'
 import './NavBar.scss';
 import { deleteFromCart } from "../../store/reducers/actions";
 
-function NavBAr(props) {
 
+function NavBAr() {
+  const state = useSelector((state) => state.reducer);
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
+
+  // Maintain a state variable for quantities
+  const [quantities, setQuantities] = useState(
+    state.cart.reduce((quantitiesObj, item) => {
+      quantitiesObj[item.id] = 1; // Initialize quantities to 1
+      return quantitiesObj;
+    }, {})
+  );
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    setQuantities({
+      ...quantities,
+      [itemId]: newQuantity,
+    });
+  };
 
   return (
     <nav
@@ -37,7 +54,7 @@ function NavBAr(props) {
         </Link>
 
         <Button ref={btnRef} onClick={onOpen}>
-          Cart({props.reducer1.cart.length})
+          Cart({state.cart.length})
         </Button>
         <Drawer
           isOpen={isOpen}
@@ -52,26 +69,51 @@ function NavBAr(props) {
             <DrawerHeader>Your Cart content: </DrawerHeader>
 
             <DrawerBody>
-              {props.reducer1.cart.map((item) => (
-                <div className="cart-item">
+              {state.cart.map((item) => (
+                <div className="cart-item" key={item.id}>
                   <div className="cart-flex">
                     <p>{item.title}</p>
-                    <p className="delete-icon" onClick={() => props.deleteFromCart(item.id)}><DeleteIcon /></p>
+                    <p
+                      className="delete-icon"
+                      onClick={() => dispatch(deleteFromCart(item.id))}
+                    >
+                      <DeleteIcon />
+                    </p>
                   </div>
-                  {
-                    <NumberInput bg={"white"} defaultValue={1} min={1} max={5}>
-                      <NumberInputField />
-                      <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                      </NumberInputStepper>
-                    </NumberInput>
-                  }
-                  <p><b>Price:</b>{item.price}$</p>
+                  <NumberInput
+                    bg={"white"}
+                    defaultValue={quantities[item.id]}
+                    min={1}
+                    max={5}
+                    value={quantities[item.id]}
+                    onChange={(valueString) => {
+                      const newQuantity = parseInt(valueString, 10);
+                      handleQuantityChange(item.id, newQuantity);
+                    }}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                  <p>
+                    <b>Price:</b> {item.price * quantities[item.id]}$
+                  </p>
                 </div>
               ))}
               <hr className="line"></hr>
-              <p><b>Total: </b> <u>{props.reducer1.cart.reduce((sum, item) => sum + item.price, 0)}$</u></p>
+              <p>
+                <b>Total: </b>
+                <u>
+                  {state.cart.reduce(
+                    (sum, item) =>
+                      sum + item.price * quantities[item.id], // Calculate total price
+                    0
+                  )}
+                  $
+                </u>
+              </p>
             </DrawerBody>
 
             <DrawerFooter>
@@ -86,15 +128,16 @@ function NavBAr(props) {
     </nav>
   );
 }
+// const mapStateToProps = (state) => {
+//   return {
+//     reducer1: state.reducer,
+//   };
+// };
 
-const mapStateToProps = (state) => {
-  return {
-    reducer1: state.reducer,
-  };
-};
+// const mapDispatchToProps = {
+//   deleteFromCart
+// }
 
-const mapDispatchToProps = {
-  deleteFromCart
-}
+// export default connect(mapStateToProps, mapDispatchToProps)(NavBAr);
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBAr);
+export default NavBAr;

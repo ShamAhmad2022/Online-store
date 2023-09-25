@@ -1,29 +1,30 @@
 import React from "react";
 import "./Product.scss";
 import {Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast} from '@chakra-ui/react';
-import { connect } from "react-redux";
-import {setProducts, setCategory, setActiveCategory, addToCart} from '../../../../store/reducers/actions'
+import { connect, useDispatch, useSelector } from "react-redux";
+import {addToCart, toggleIsClicked} from '../../../../store/reducers/actions'
 
-function Product({item, reducer1, addToCart}) {
-
-  console.log(reducer1,'66666666666');
+function Product({ item }) {
+  const dispatch = useDispatch();
+  const isClicked = useSelector((state) => state.reducer);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
 
-  const showToast =()=>{
+  const showToast = () => {
     return toast({
-      title: `Item added succefully`,
+      title: `Item added successfully`,
       status: 'success',
       position: 'top-left',
       isClosable: true,
     });
-  }
+  };
 
-  const onClick = (item) =>{
-    addToCart(item);
+  const onClick = () => {
+    dispatch(addToCart(item));
+    dispatch(toggleIsClicked(item.id)); // Pass the product ID to toggleIsClicked
     showToast();
-  }
+  };
 
   return (
     <>
@@ -38,7 +39,7 @@ function Product({item, reducer1, addToCart}) {
           {/* <p className="card-text">{item.description}</p> */}
         </div>
         <div className="card-body">
-        <button className="card-link btn btn-primary" onClick={() => onClick(item)}>Add to cart</button>
+        <button className="card-link btn btn-primary" onClick={() => onClick(item)} disabled={isClicked.clickedItems[item.id]}>Add to cart</button>
         {/* <button className="card-link btn btn-primary">view details</button> */}
         <Button className="card-link btn btn-primary" onClick={onOpen}>view details</Button>
 
@@ -68,16 +69,18 @@ function Product({item, reducer1, addToCart}) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    reducer1 : state.reducer
-  };
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     : state.reducer
+//   };
+// }
 
 
-const mapDispatchToProps = {
-  addToCart
-}
+// const mapDispatchToProps = {
+//   addToCart
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+// export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
+export default Product;
