@@ -4,8 +4,9 @@ import { actionTypes } from "./actionTypes";
 export const initialState = {
     products: [],
     category: [],
-    activeCategory : '',
-    cart: []
+    activeCategory: '',
+    cart: [],
+    clickedItems: {}
 }
 
 //then the reducers
@@ -33,6 +34,14 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state, cart: state.cart.filter(item => item.id!==payload)
             }
+        case actionTypes.TOGGLE_IS_CLICKED:
+            return {
+                ...state,
+                clickedItems: {
+                ...state.clickedItems,
+                [payload]: !state.clickedItems[payload], // Toggle the clicked state for the given item ID
+                },
+            };
     
         default: return state;
     }
