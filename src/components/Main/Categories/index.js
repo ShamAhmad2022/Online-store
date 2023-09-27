@@ -1,11 +1,12 @@
 import React from 'react';
 import './Categories.scss';
-import { setActiveCategory } from '../../../store/reducers/actions';
+// import { setActiveCategory } from '../../../store/reducers/actions';
+import { setActiveCategory } from '../../../store/Slicers/slicer';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Categories() {
 
-  const state = useSelector(state => state.reducer);
+  const state = useSelector(state => state.reducer1);
   const dispatch = useDispatch();
 
   const allcategories = [...new Set(state.category)];

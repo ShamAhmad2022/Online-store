@@ -4,21 +4,23 @@ import Categories from './Categories'
 import './Main.scss';
 import axios from 'axios';
 import { initialState, reducer } from '../../store/reducers/reducer';
-import { setProducts, setCategory, setActiveCategory, addToCart } from '../../store/reducers/actions';
+// import { setProducts, setCategory, setActiveCategory, addToCart } from '../../store/reducers/actions';
+import { setProducts, setCategory } from '../../store/Slicers/slicer';
 import { actionTypes } from '../../store/reducers/actionTypes';
 import { connect, useDispatch, useSelector } from 'react-redux';
 
 /*
 //first i used useState
-//then i used a redducer
+//then i used a reducer
 //then i used Redux with mapState/DispatchToProps
 //then i used Redux with useSelector and useDispatch and thunk
+//and finally i used Redux redux toolkit and slicers
 */
 function Main() {
 
   // const [state, dispatch] = useReducer(reducer, initialState);
   
-  const state = useSelector(state => state.reducer);
+  const state = useSelector(state => state.reducer1);
   const dispatch = useDispatch();
 
   useEffect(() => {

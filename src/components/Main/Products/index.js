@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function Products() {
 
-  const state = useSelector(state => state.reducer);
+  const state = useSelector(state => state.reducer1);
 
   return (
     <div className="categories-flex">

@@ -2,11 +2,13 @@ import React from "react";
 import "./Product.scss";
 import {Button, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Box, useToast} from '@chakra-ui/react';
 import { connect, useDispatch, useSelector } from "react-redux";
-import {addToCart, toggleIsClicked} from '../../../../store/reducers/actions'
+// import {addToCart, toggleIsClicked} from '../../../../store/reducers/actions'
+import {addToCart, toggleIsClicked} from '../../../../store/Slicers/slicer';
 
 function Product({ item }) {
+
   const dispatch = useDispatch();
-  const isClicked = useSelector((state) => state.reducer);
+  const state = useSelector((state) => state.reducer1);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -39,7 +41,7 @@ function Product({ item }) {
           {/* <p className="card-text">{item.description}</p> */}
         </div>
         <div className="card-body">
-        <button className="card-link btn btn-primary" onClick={() => onClick(item)} disabled={isClicked.clickedItems[item.id]}>Add to cart</button>
+        <button className="card-link btn btn-primary" onClick={() => onClick(item)} disabled={state.clickedItems[item.id]}>Add to cart</button>
         {/* <button className="card-link btn btn-primary">view details</button> */}
         <Button className="card-link btn btn-primary" onClick={onOpen}>view details</Button>
 
