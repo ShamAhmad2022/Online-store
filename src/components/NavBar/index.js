@@ -16,14 +16,16 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Input
 } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 import './NavBar.scss';
-import { deleteFromCart } from "../../store/reducers/actions";
+// import { deleteFromCart } from "../../store/reducers/actions";
+import { deleteFromCart } from "../../store/Slicers/slicer";
 
 
 function NavBAr() {
-  const state = useSelector((state) => state.reducer);
+  const state = useSelector((state) => state.reducer1);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -31,7 +33,7 @@ function NavBAr() {
   // Maintain a state variable for quantities
   const [quantities, setQuantities] = useState(
     state.cart.reduce((quantitiesObj, item) => {
-      quantitiesObj[item.id] = 1; // Initialize quantities to 1
+      quantitiesObj[item.id] = 1; 
       return quantitiesObj;
     }, {})
   );
@@ -82,10 +84,9 @@ function NavBAr() {
                   </div>
                   <NumberInput
                     bg={"white"}
-                    defaultValue={quantities[item.id]}
+                    defaultValue={1}
                     min={1}
                     max={5}
-                    value={quantities[item.id]}
                     onChange={(valueString) => {
                       const newQuantity = parseInt(valueString, 10);
                       handleQuantityChange(item.id, newQuantity);
@@ -98,29 +99,44 @@ function NavBAr() {
                     </NumberInputStepper>
                   </NumberInput>
                   <p>
-                    <b>Price:</b> {item.price * quantities[item.id]}$
+                    <b>Price:</b> {isNaN(item.price * quantities[item.id])? item.price : item.price * quantities[item.id]}$
                   </p>
                 </div>
               ))}
-              <hr className="line"></hr>
-              <p>
+              <p className="total">
                 <b>Total: </b>
                 <u>
                   {state.cart.reduce(
                     (sum, item) =>
-                      sum + item.price * quantities[item.id], // Calculate total price
+                    isNaN(sum + item.price * quantities[item.id])? sum + item.price : sum + item.price * quantities[item.id], // Calculate total price
                     0
                   )}
                   $
                 </u>
               </p>
+              <hr className="line"></hr>
+
+            <div>
+              <form>
+              <h4>Billing Adress</h4>
+              <Input className="form-element" placeholder='FullName' size='md' />
+              <Input className="form-element" placeholder='Adress' size='md' />
+              <Input className="form-element" placeholder='City' size='md' />
+              <Input className="form-element" placeholder='State' size='md' />
+              <Input className="form-element" placeholder='Zip' size='md' />
+              <h4>Payment details</h4>
+              <Input className="form-element" placeholder='Card #' size='md' />
+              <Input className="form-element" placeholder='Exp. date' size='md' />
+              <Input className="form-element" placeholder='CVV' size='md' />
+              </form>
+            </div>
             </DrawerBody>
 
             <DrawerFooter>
               <Button variant="outline" mr={3} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="blue">Confirm</Button>
+              <Button colorScheme="blue" type="submit" onClick={()=> alert('Your payment has been processed succefully')}>Confirm</Button>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
