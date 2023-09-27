@@ -10,7 +10,7 @@ A Web application will power an online storefront that will allow our users to b
 
 * deployed application : [https://main--idyllic-marzipan-c82c0e.netlify.app/](https://main--idyllic-marzipan-c82c0e.netlify.app/)
 
-* pull request: [https://github.com/ShamAhmad2022/storefront/pull/6](https://github.com/ShamAhmad2022/storefront/pull/6)
+* pull request: [https://github.com/ShamAhmad2022/storefront/pull/8](https://github.com/ShamAhmad2022/storefront/pull/8)
 
 ### Running the app
 
